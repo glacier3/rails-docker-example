@@ -1,8 +1,8 @@
-FROM ruby:2.2.1
+FROM ruby:latest
 MAINTAINER Mook <mookjpy@gmail.com>
 
 # Install nginx with passenger
-RUN gem install passenger -v 5.0.4 && \
+RUN gem install passenger && \
     apt-get update && \
     apt-get install -y libcurl4-openssl-dev && \
     passenger-install-nginx-module --auto
@@ -24,6 +24,8 @@ WORKDIR /usr/src/app
 
 ADD Gemfile /usr/src/app/
 ADD Gemfile.lock /usr/src/app/
+RUN gem sources --add https://gems.ruby-china.org/ --remove https://rubygems.org/
+RUN bundle config mirror.https://rubygems.org https://gems.ruby-china.org
 RUN bundle install --system
 
 ADD . /usr/src/app
