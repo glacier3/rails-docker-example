@@ -80,6 +80,7 @@ These are required to run it as Docker containers.
 All you have to do is bellow:
 
 ```sh
+docker-compose build
 docker-compose up
 ```
 
@@ -117,6 +118,13 @@ data:
     - /var/lib/postgresql/data
     - .:/usr/src/app
 ```
+
+```sh
+docker-compose -f docker-compose-development.yml build
+docker-compose -f docker-compose-development.yml up
+```
+
+Then, open http://localhost:3000 to access this site.
 
 ## Deployment
 
